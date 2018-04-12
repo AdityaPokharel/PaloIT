@@ -3,6 +3,7 @@ const bodyParser = require('body-parser'),
       express    = require("express"),
       app        = express();
       
+app.use(express.static(__dirname + '/views/public')); // To use the css file.
 mongoose.connect("mongodb://localhost/name_app");
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -42,7 +43,7 @@ app.post("/names", (req, res) => {
     // Create a new name
     Name.create(req.body.name, (err, newName) => {
         if(err){
-            let errorMessage = "Something went wrong. Please try again.";
+            const errorMessage = "Something went wrong. Please try again.";
             res.render("/", {errorMessage: errorMessage}); // TODO: Add error handling in index.ejs.
         } else {
             res.redirect("/");
@@ -53,9 +54,11 @@ app.post("/names", (req, res) => {
 function calculate(fullName){
     // Convert each character to ASCII and add the ASCII value to variable sum.
     let sum = 0;
+    
     for(let i = 0; i < fullName.length; i++){
         sum += fullName.charCodeAt(i);
     }
+    console.log("-----------")
     console.log("Name: ", fullName);
     console.log("Sum is: ", sum); // for debugging.
     
@@ -78,10 +81,15 @@ function calculate(fullName){
         }
     }
     
+    // To handle cases where the binary number ends in zeroes e.g. "10000"
+    if(currentZeroCount > maxZeroCount) {
+        maxZeroCount = currentZeroCount;
+    }
+    
     return maxZeroCount;
 }
 
-console.log(calculate("Ann Other"));
+// console.log(calculate("Ann Other"));
 
 app.listen(process.env.PORT, process.env.IP, () => {
     console.log("Server is running!");

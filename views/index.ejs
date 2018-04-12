@@ -3,26 +3,26 @@
     <head>
         <meta charset="utf-8">
         <title>Count My Zeros</title>
-        <link rel="stylesheet" href="assets/css/style.css">
-        <script type="text/javascript" src="assets/js/lib/script.js"></script>
+        <!--<script type="text/javascript" src="/js/lib/script.js"></script>-->
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
     </head>
     <body>
         <div id="container">
-            <h1>Count Zeros</h1>
+            <h1>Count Zeros <i class="fas fa-calculator"></i></h1>
             <% if (typeof errorMessage != 'undefined') { %>
                 <p><%= errorMessage %></p>
             <% } %>
             <form class="ui form" action="/names" method="POST">
                     <input type="text" name="name[firstName]" placeholder="First Name"> 
                     <input type="text" name="name[lastName]" placeholder="Last Name">
-                <button type="submit">Submit</button>
+                    <input type="submit" class="submit" name="go" value="Submit"/>
             </form>
                 
             <ul>
                 <% names.forEach((name) => { %>
-                    <li><%= name.fullName %> - <%= name.zeroCount %></li>
+                    <li><%= name.fullName %> <span class="zeroCount"><%= name.zeroCount %></span></li>
                 <% }); %>
             </ul>
         </div>
