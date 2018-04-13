@@ -3,7 +3,7 @@ const bodyParser = require('body-parser'),
       express    = require("express"),
       app        = express();
       
-app.use(express.static(__dirname + '/views/public')); // To use the css file.
+app.use(express.static('./views/public')); // To use the css file.
 mongoose.connect("mongodb://localhost/name_app");
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -36,7 +36,6 @@ app.get("/", (req, res) => {
             res.render("index.ejs", {names: nameAndZeros})
         }
     });
-    // res.render("index.ejs", {Names: Names});
 });
 
 app.post("/names", (req, res) => {

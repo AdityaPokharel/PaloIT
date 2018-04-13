@@ -12,6 +12,12 @@ h1 {
     font-weight:normal;
 }
 
+.errorMessage {
+    color: #f97b3b;
+    padding-left: 10px;
+    text-align: center;
+}
+
 .fa-plus {
     float: right;
     cursor: pointer;
